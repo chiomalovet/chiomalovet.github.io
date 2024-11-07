@@ -1,4 +1,4 @@
-/* Reset and basic styles
+Reset and basic styles
 * {
     margin: 0;
     padding: 0;
@@ -61,21 +61,4 @@ footer {
     margin-top: 20px;
     text-align: center;
     color: #666;
-} */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-}
-
-input, button {
-    padding: 10px;
-    font-size: 16px;
-    margin: 10px;
-}
-
-#result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
 }
