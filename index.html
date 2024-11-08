@@ -1,46 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Economic Dashboard</title>
+    <title>Economic Dashboard for Nigeria</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <div class="container">
         <h1>Economic Dashboard for Nigeria</h1>
         <p>Monitor inflation, interest rates, and stock performance with AI-powered insights.</p>
-    </header>
 
-    <main>
-        <section id="data-overview">
+        <div class="section">
             <h2>Current Economic Data</h2>
-            <div id="data-display"> 
-                <!-- Dynamic content will be loaded here by JavaScript -->
-             </div>
-        </section>
-
-        <section id="prediction">
-            <h2>Inflation Prediction</h2>
-            <button onclick="fetchPrediction()">Get Latest Prediction</button>
-            <div id="prediction-output">
-                Dynamic prediction data will display here
+            <div id="currentData">
+                
+                <p>Fetching current economic data...</p>
             </div>
-        </section>
+        </div>
 
-        <section id="scenario-simulation">
-            <h2>Scenario Simulation</h2> 
-             <label for="interest-rate">Interest Rate:</label>
-            <input type="number" id="interest-rate" placeholder="e.g., 5%">
-            <label for="inflation-rate">Inflation Rate:</label>
-            <input type="number" id="inflation-rate" placeholder="e.g., 10%">
-            <button onclick="runSimulation()">Run Simulation</button>
-            <div id="simulation-result"> 
-                <!-- Simulation result will display here -->
-             </div>
-        </section>
-    </main>
+        <div class="section">
+            <h2>Inflation Prediction</h2>
+            <button id="getPredictionButton">Get Latest Prediction</button>
+            <p id="predictionOutput">Dynamic prediction data will display here</p>
+        </div>
 
+        <div class="section">
+            <h2>Scenario Simulation</h2>
+            <input type="text" id="interestRateInput" placeholder="Interest Rate: e.g., 5%">
+            <input type="text" id="inflationRateInput" placeholder="Inflation Rate: e.g., 10%">
+            <button id="runSimulationButton">Run Simulation</button>
+            <p id="simulationOutput">Simulation result will display here</p>
+        </div>
+    </div>
     <footer>
         <p>Powered by AI and Economic Data Analysis</p>
     </footer>

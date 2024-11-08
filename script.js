@@ -1,66 +1,84 @@
-// Define the backend API base URL (replace with your actual backend URL)
-const apiBaseUrl = 'http://localhost:5000/api';
 
-// Fetch current economic data
-async function fetchEconomicData() {
-    try {
-        const response = await fetch(`${apiBaseUrl}/economic-data`);
-        const data = await response.json();
-
-        // Update the economic data section
-        const dataDisplay = document.getElementById('data-display');
-        dataDisplay.innerHTML = `
-            <p><strong>Inflation:</strong> ${data.inflation}%</p>
-            <p><strong>CBN Interest Rate:</strong> ${data.interestRate}%</p>
-            <p><strong>Stock Market Performance:</strong> ${data.stockMarket}</p>
-        `;
-    } catch (error) {
-        console.error('Error fetching economic data:', error);
-    }
-}
-
-// Fetch inflation prediction
-async function fetchPrediction() {
-    try {
-        const response = await fetch(`${apiBaseUrl}/inflation-prediction`);
-        const prediction = await response.json();
-
-        // Update the prediction section
-        const predictionOutput = document.getElementById('prediction-output');
-        predictionOutput.innerHTML = `
-            <p>Predicted Inflation: ${prediction.inflation}%</p>
-        `;
-    } catch (error) {
-        console.error('Error fetching prediction:', error);
-    }
-}
-
-// Run a simulation based on user input
-async function runSimulation() {
-    const interestRate = document.getElementById('interest-rate').value;
-    const inflationRate = document.getElementById('inflation-rate').value;
-
-    try {
-        const response = await fetch(`${apiBaseUrl}/run-simulation`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ interestRate, inflationRate })
-        });
-        const result = await response.json();
-
-        // Update the simulation result section
-        const simulationResult = document.getElementById('simulation-result');
-        simulationResult.innerHTML = `
-            <p>${result.message}</p>
-        `;
-    } catch (error) {
-        console.error('Error running simulation:', error);
-    }
-}
-
-// Load data when the page loads
-window.onload = () => {
-    fetchEconomicData();
+// Mock data for demonstration purposes
+const economicData = {
+    inflationRates: [
+        { month: "January", rate: 15.3 },
+        { month: "February", rate: 15.6 },
+        { month: "March", rate: 16.2 },
+        { month: "April", rate: 16.7 },
+        { month: "May", rate: 17.1 },
+        { month: "June", rate: 17.5 },
+    ],
+    interestRates: [
+        { month: "January", rate: 12.5 },
+        { month: "February", rate: 12.7 },
+        { month: "March", rate: 13.1 },
+        { month: "April", rate: 13.5 },
+        { month: "May", rate: 13.8 },
+        { month: "June", rate: 14.0 },
+    ]
 };
 
+// Function to display current economic data
+function displayCurrentData() {
+    const currentDataDiv = document.getElementById("currentData");
+    let dataHtml = "<h3>Current Inflation and Interest Rates</h3><ul>";
 
+    // Display the latest inflation and interest rate
+    const latestInflation = economicData.inflationRates[economicData.inflationRates.length - 1];
+    const latestInterest = economicData.interestRates[economicData.interestRates.length - 1];
+    
+    dataHtml += `<li>Latest Inflation Rate (${latestInflation.month}): ${latestInflation.rate}%</li>`;
+    dataHtml += `<li>Latest Interest Rate (${latestInterest.month}): ${latestInterest.rate}%</li>`;
+    
+    dataHtml += "</ul>";
+    currentDataDiv.innerHTML = dataHtml;
+}
+
+// Function to simulate an inflation prediction
+function getLatestPrediction() {
+    const predictionOutput = document.getElementById("predictionOutput");
+
+    // Simulate a basic prediction using the trend in historical data
+    const lastTwoRates = economicData.inflationRates.slice(-2);
+    const predictedRate = (lastTwoRates[0].rate + lastTwoRates[1].rate) / 2 + 0.5; // Adding a small increment for trend
+
+    predictionOutput.innerText = `Predicted Inflation Rate for next month: ${predictedRate.toFixed(2)}%`;
+}
+
+// Function to run a simulation based on user inputs
+function runSimulation() {
+    const interestRateInput = document.getElementById("interestRateInput").value;
+    const inflationRateInput = document.getElementById("inflationRateInput").value;
+    const simulationOutput = document.getElementById("simulationOutput");
+
+    // Validate user inputs
+    if (!interestRateInput || !inflationRateInput) {
+        alert("Please enter both interest and inflation rates.");
+        return;
+    }
+
+    const interestRate = parseFloat(interestRateInput);
+    const inflationRate = parseFloat(inflationRateInput);
+
+    // Simple simulation logic
+    let economicOutlook;
+    if (interestRate < 10 && inflationRate < 10) {
+        economicOutlook = "Stable economic growth";
+    } else if (interestRate >= 10 && inflationRate >= 10) {
+        economicOutlook = "Potential economic slowdown";
+    } else if (interestRate >= 10 && inflationRate < 10) {
+        economicOutlook = "High interest rate may curb inflation";
+    } else {
+        economicOutlook = "Low interest rate might lead to inflation";
+    }
+
+    simulationOutput.innerText = `Based on an interest rate of ${interestRate}% and an inflation rate of ${inflationRate}%, the economic outlook is: ${economicOutlook}.`;
+}
+
+// Event listeners for buttons
+document.getElementById("getPredictionButton").addEventListener("click", getLatestPrediction);
+document.getElementById("runSimulationButton").addEventListener("click", runSimulation);
+
+// Initialize the dashboard with current data
+displayCurrentData();

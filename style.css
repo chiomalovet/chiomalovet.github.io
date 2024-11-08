@@ -1,4 +1,4 @@
-Reset and basic styles
+/* Reset and basic styles */
 * {
     margin: 0;
     padding: 0;
@@ -14,36 +14,52 @@ body {
     align-items: center;
 }
 
-header {
-    background-color: #0073e6;
-    color: #fff;
-    padding: 20px;
-    width: 100%;
-    text-align: center;
-}
-
+/* Header styling */
 h1 {
+    background-color: #0073e6; /* Deep blue header background */
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
     font-size: 2em;
 }
 
-main {
-    width: 80%;
-    max-width: 900px;
-    margin: 20px auto;
+ h1 {
+    font-size: 2em;
+}
+p {
+    text-align: center;
+    color: #333;
+    padding: 10px;
+    font-size: 1.1em;
 }
 
-section {
-    background-color: #fff;
-    border-radius: 8px;
+/* Full-width container */
+.container {
+    width: 100%;
     padding: 20px;
-    margin: 10px 0;
+    max-width: 1200px;
+    
+}
+
+/* Section styling */
+.section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#data-overview, #prediction, #scenario-simulation {
-    padding: 20px;
+.section h2 {
+    color: #0073e6;
+    margin-bottom: 10px;
 }
 
+.section p {
+    margin-top: 10px;
+}
+
+/* Button styling */
 button {
     background-color: #0073e6;
     color: #fff;
@@ -51,14 +67,26 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 1em;
+    margin: 5px;
 }
 
 button:hover {
     background-color: #005bb5;
 }
 
+/* Page break for new page */
+.page-break {
+    page-break-before: always; /* Only for print preview */
+    padding-top: 20px;
+}
+
+/* Footer styling */
 footer {
     margin-top: 20px;
     text-align: center;
     color: #666;
+    width: 100%;
+    background-color: #f0f4f8;
+    padding: 10px 0;
 }
